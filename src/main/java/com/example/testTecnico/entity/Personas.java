@@ -27,6 +27,8 @@ public class Personas {
     private boolean sexo;
 
     @OneToOne
+    //JoinColumn se usa para darle nombre a la foraing key
+    //and unir la entidad dependiente(esta entidad) con su entidad independiente(entidad empleados)
     @JoinColumn(name = "id_empleado")
     private Empleados empleados;
 
