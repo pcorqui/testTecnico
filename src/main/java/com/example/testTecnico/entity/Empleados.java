@@ -1,5 +1,6 @@
 package com.example.testTecnico.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,7 +24,13 @@ public class Empleados {
     @Column(name = "Fecha_Ingreso")
     private String FechaIngreso;
 
-    @OneToOne
+    //al usar mappedBy hacemos decimos que esta entidad
+    //esta referenciada por empleados en otra relacion
+    //lo cual ya no genera una columna en esta entidad
+    @JsonIgnore
+    @OneToOne(mappedBy = "empleados")
+    //al hacer esto la anotacion JoinColum no tiene efecto
+    //@JoinColumn(name = "Id")
     private Personas persona;
 
 //    @ManyToMany
