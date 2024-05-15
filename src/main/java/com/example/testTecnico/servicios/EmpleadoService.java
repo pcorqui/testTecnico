@@ -1,10 +1,15 @@
 package com.example.testTecnico.servicios;
 
 import com.example.testTecnico.DTO.EmpleadosDTO;
+import com.example.testTecnico.entity.Empleados;
+import com.example.testTecnico.repositories.EmpleadosPageRepository;
 import com.example.testTecnico.repositories.EmpleadosRepository;
 import com.example.testTecnico.repositories.PersonasRepository;
 import com.example.testTecnico.repositories.RolesRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +27,9 @@ public class EmpleadoService {
     @Autowired
     RolesRepositories rolesRepositories;
 
+    @Autowired
+    EmpleadosPageRepository empleadosPageRepository;
+
     public List<EmpleadosDTO> getAllEmpleados(){
         //logica para obtener los empleados
         List<EmpleadosDTO> lista = new ArrayList<EmpleadosDTO>();
@@ -33,5 +41,14 @@ public class EmpleadoService {
 
         //obtener EmpleadoDao
         //List<Empleados> empleados = empleadosRepository.findAll();
+    }
+
+    public List<Empleados> empleadosList(){
+        return empleadosRepository.findAll();
+    }
+
+    public Page<Empleados> empleadosPage(){
+        Pageable pageable = PageRequest.of(1,4);
+        return empleadosPageRepository.findAll(pageable);
     }
 }
